@@ -6,14 +6,14 @@ namespace logics.model
 {
     class Starting
     {
-        private List<string> words = new List<string>();        // Stores all words from CSV
-        private List<string> usedWords = new List<string>();    // Stores already used words
+        private List<string> words = new List<string>();        
+        private List<string> usedWords = new List<string>();   
         private static Random rnd = new Random();
 
         public string choosenword { get; private set; }
         public List<string> AllWords => words;
 
-        // Entry function
+        
         public void Startfun(string csvFilePath)
         {
             Load(csvFilePath);
@@ -24,10 +24,10 @@ namespace logics.model
             PickRandomWord();
         }
 
-        // Load all words from CSV file
+      
         private void Load(string csvFilePath)
         {
-            //  Properly find CSV file in model folder relative to program's run directory
+           
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "model", csvFilePath);
 
             if (!File.Exists(path))
@@ -52,30 +52,25 @@ namespace logics.model
             Console.ResetColor();
         }
 
-        // Pick a random unused word from the list
         public void PickRandomWord()
         {
             if (words.Count == 0)
                 throw new InvalidOperationException("Word list is empty!");
 
-            // Filter out used words
             var availableWords = new List<string>(words);
             foreach (var used in usedWords)
                 availableWords.Remove(used);
-
-            // ✅ If all words are used, reset
             if (availableWords.Count == 0)
             {
-                Console.WriteLine("🔁 All words used once — resetting list...");
+                Console.WriteLine("All words used once — resetting list...");
                 usedWords.Clear();
                 availableWords = new List<string>(words);
             }
 
-            // Randomly pick a new word
+            
             int index = rnd.Next(availableWords.Count);
             choosenword = availableWords[index].ToUpper();
 
-            //  Add to used list to prevent repeat
             usedWords.Add(choosenword);
         }
     }
