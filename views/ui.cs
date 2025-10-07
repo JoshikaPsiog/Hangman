@@ -9,6 +9,10 @@ namespace ui.model
     {
         public void Frontend()
         {
+            Console.Write("Enter your name: ");
+            string playerName = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(playerName))
+                playerName = "Player";
             Starting start = new Starting();
 start.Startfun("words.csv");
 
@@ -16,7 +20,6 @@ bool keepPlaying = true;
 
 while (keepPlaying)
 {
-    // --- UPDATED: pick a random word for this round ---
     start.PickRandomWord();
     string wordToGuess = start.choosenword;
 
@@ -34,17 +37,18 @@ while (keepPlaying)
             Console.WriteLine(" /|\\ ");
             Console.WriteLine(" / \\ ");
             Console.ResetColor();
-            Console.WriteLine("Congratulations! You guessed the word!");
+            Console.WriteLine($"Congratulations!  {playerName} You guessed the word!");
         }
         else
         {
-            Console.WriteLine("Sorry, you lost. The word was: " + g.WordToGuess);
+            Console.WriteLine($"Sorry {playerName}, you lost. The word was: " + g.WordToGuess);
         }
     };
 
     while (game.GameStatus == GameStatus.Ongoing)
     {
         Console.Clear();
+                    Console.WriteLine("Theme is School, Guess the Words, ALL THE BEST");
         Console.WriteLine("Word: " + game.DisplayWord());
         Console.WriteLine("Wrong guesses: " + string.Join(", ", game.WrongGuesses));
         Console.WriteLine($"Attempts left: {game.AttemptsLeft}/3");
