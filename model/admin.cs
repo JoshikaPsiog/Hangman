@@ -5,7 +5,6 @@ namespace Hangmanadmin.model
 {
     public class Csv
     {
-
         public void added()
         {
             Console.WriteLine("Enter a word to add:");
