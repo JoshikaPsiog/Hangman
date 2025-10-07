@@ -11,7 +11,7 @@ class program
         if (num == 1)
         {
             Csv admins = new Csv();
-            admins.added();
+            admins.Menu();
         }
         else
         {
